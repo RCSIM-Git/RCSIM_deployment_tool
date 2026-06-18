@@ -19,6 +19,12 @@ if %errorlevel% neq 0 (
     pip install paramiko cryptography pyinstaller-hooks-contrib
 )
 
+python -c "import flask" 2>nul
+if %errorlevel% neq 0 (
+    echo [RCSIM BUILD] Flask nie jest zainstalowane. Instalowanie...
+    pip install flask
+)
+
 echo [RCSIM BUILD] Uruchamianie kompilacji za pomoca build_deployment.py...
 python "%~dp0core\build_deployment.py"
 

@@ -23,7 +23,11 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from core import deployment_logic
 
 APP_NAME = "RCSIMDeploymentTool"
-SETTINGS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "core", "deployment_settings.json")
+if getattr(sys, "frozen", False):
+    application_path = os.path.dirname(sys.executable)
+    SETTINGS_FILE = os.path.join(application_path, "deployment_settings.json")
+else:
+    SETTINGS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "core", "deployment_settings.json")
 LOCALE_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui", "locales"))
 SUPPORTED_LANGUAGES = {"English": "en", "Polski": "pl"}
 
